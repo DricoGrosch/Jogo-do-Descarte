@@ -18,8 +18,6 @@ class DummyAgent:
         return None
 
     def disposable(self, shown_card, card):
-        number = shown_card.split('_')[0]
-        suit = shown_card.split('_')[1]
-        c_number = card.split('_')[0]
-        c_suit = card.split('_')[1]
-        return (c_number == number or c_suit == suit)
+        shown_card_number, shown_card_suit = shown_card.split('_')
+        c_number, c_suit = card.split('_')
+        return (c_number == shown_card_number or c_suit == shown_card_suit)

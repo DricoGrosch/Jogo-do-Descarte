@@ -12,14 +12,15 @@ class Environment:
         self.setup(seed)
 
     def setup(self, seed=None):
-        if seed is not None: random.seed(seed)
+        if seed:
+            random.seed(seed)
 
         numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
         suits = ['P', 'C', 'E', 'O']
         all_cards = []
         for number in numbers:
             for suit in suits:
-                all_cards.append(number + '_' + suit)
+                all_cards.append(f'{number}_{suit}')
 
         random.shuffle(all_cards)
         self.hand = all_cards[:5]
