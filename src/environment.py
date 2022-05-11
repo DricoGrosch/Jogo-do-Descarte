@@ -36,14 +36,12 @@ class Environment:
     def sense(self):
         return self.shown_card, self.hand
 
-    def act(self, action):
-        if VERBOSE:
-            print('Shown card is %s' % self.shown_card)
-            print('Hand is', self.hand)
-        if action is not None:
-            if VERBOSE: print('Disposing card %s\n---' % action)
-            self.hand.remove(action)
-            self.shown_card = action
-        else:
-            if VERBOSE: print('Getting card %s from stack\n---' % self.stack[-1])
-            self.hand.append(self.stack.pop())
+    def buy_card(self):
+        self.hand.append(self.stack.pop())
+
+    def dispose_card(self, card):
+        self.hand.remove(card)
+        self.shown_card = card
+
+    def act(self, card):
+        self.dispose_card(card) if card else self.buy_card()

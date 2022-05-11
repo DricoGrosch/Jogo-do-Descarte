@@ -1,23 +1,10 @@
-class DummyAgent:
-    def __init__(self, _env):
-        self.env = _env
+from src.agent import Agent
 
-    def step(self):
-        shown_card, hand = self.sense()
-        action = self.act(shown_card, hand)
-        self.env.act(action)
 
-    def sense(self):
-        shown_card, hand = self.env.sense()
-        return shown_card, hand
+class DummyAgent(Agent):
 
     def act(self, shown_card, hand):
         for card in hand:
             if self.disposable(shown_card, card):
                 return card
         return None
-
-    def disposable(self, shown_card, card):
-        shown_card_number, shown_card_suit = shown_card.split('_')
-        c_number, c_suit = card.split('_')
-        return (c_number == shown_card_number or c_suit == shown_card_suit)
