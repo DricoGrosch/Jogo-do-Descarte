@@ -7,6 +7,7 @@ class Environment:
     shown_card = None
     stack = None
     hand = None
+    thrown_cards = []
 
     def __init__(self, seed=None):
         self.setup(seed)
@@ -15,6 +16,8 @@ class Environment:
         if seed:
             random.seed(seed)
 
+        # numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
+        # suits = ['P', 'C', 'E', 'O']
         numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
         suits = ['P', 'C', 'E', 'O']
         all_cards = []
@@ -42,6 +45,7 @@ class Environment:
     def dispose_card(self, card):
         self.hand.remove(card)
         self.shown_card = card
+        self.thrown_cards.append(card)
 
-    def act(self, card):
+    def act(self, card=None):
         self.dispose_card(card) if card else self.buy_card()

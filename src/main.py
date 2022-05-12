@@ -1,9 +1,10 @@
-from src.dummy_agent import DummyAgent
 from src.environment import Environment
+from src.smart_agent import SmartAgent
 
-env = Environment()
-agent = DummyAgent(env)
-
+env = Environment(5)
+agent = SmartAgent(strategy=SmartAgent.WIDE,_env=env)
+import sys
+sys.setrecursionlimit(3000)
 while not env.finish():
     agent.step()
 print(env.score())
