@@ -2,7 +2,7 @@ from src.environment import Environment
 from src.smart_agent import SmartAgent
 
 env = Environment(5)
-agent = SmartAgent(strategy=SmartAgent.DEEP,_env=env)
+agent = SmartAgent(strategy=SmartAgent.WIDE,_env=env)
 import sys
 sys.setrecursionlimit(10000)
 
