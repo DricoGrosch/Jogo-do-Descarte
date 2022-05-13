@@ -18,9 +18,6 @@ class Graph:
             self.visited_nodes.append(node)
         self.current_node = node
 
-    def get_node_representation(self, node):
-        return '|'.join(node['node'])
-
     def add_open_node(self, thrown_card, node, environment):
         self.open_nodes.append({
             'thrown_card': thrown_card,

@@ -5,7 +5,8 @@ class Agent:
     def step(self):
         shown_card, hand = self.sense()
         card = self.act(shown_card, hand)
-        self.env.act(card)
+        self.env.act(card,False)
+        print()
 
     def sense(self):
         shown_card, hand = self.env.sense()
