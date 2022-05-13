@@ -14,4 +14,5 @@ while not env.finish():
 
 
 print(env.score())
+print('adrian')
 # pra cada nó (cada jogada) verificar as cartas que eu posso descartar e pra cada uma criar uma ramificação

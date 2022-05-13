@@ -20,17 +20,9 @@ class SmartAgent(Agent):
 
     def handle_strategy(self, environment):
         self.counter += 1
-        # if(self.counter==1000):
-        #     print()
-        print(self.counter)
-        print('---------------------------------')
-        print()
+
         if self.graph.current_node is None:
             self.graph.visit_node(environment.hand)
-
-        print(f'hand-->{len(environment.hand)}')
-        print(f'stack-->{len(environment.stack)}')
-
         if environment.stack:
             buy_environment = environment._copy()
             buy_environment.act()
@@ -55,7 +47,7 @@ class SmartAgent(Agent):
         if not target_node['environment'].hand:
             return target_node['environment'].victory_trail
 
-        if not self.graph.open_nodes:
+        if not self.graph.open_nodes and not target_node['environment'].stack:
             return None
 
         return self.handle_strategy(target_node['environment'])
