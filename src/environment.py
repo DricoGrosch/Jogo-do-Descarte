@@ -16,9 +16,14 @@ class Environment:
         if seed:
             random.seed(seed)
 
-        numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '14', '15', '16', '17',
-                   '18', '19', '20', '21', '22', '23', '24', '25', '26']
-        suits = ['P', 'C', 'E', 'O', 'X', 'Y', 'Z', 'W']
+        # numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '14', '15', '16', '17',
+        #            '18', '19', '20', '21', '22', '23', '24', '25', '26']
+        # suits = ['P', 'C', 'E', 'O', 'X', 'Y', 'Z', 'W']
+        # numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
+        # suits = ['P', 'C', 'E', 'O']
+        numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
+        suits = ['P', 'C', 'E', 'O']
+
         all_cards = []
         for number in numbers:
             for suit in suits:
@@ -54,7 +59,7 @@ class Environment:
         return self.shown_card, self.hand
 
     def buy_card(self):
-        self.hand.append(self.stack.pop(0))
+        self.hand.append(self.stack.pop())
 
     def dispose_card(self, card):
         self.hand.remove(card)
