@@ -4,9 +4,15 @@ class Agent:
 
     def step(self):
         shown_card, hand = self.sense()
-        card = self.act(shown_card, hand)
-        self.env.act(card,False)
-        print()
+        try:
+            self.act(shown_card, hand)
+        except Exception as e:
+            print(e)
+        _victory_trail=[*self.env.victory_trail]
+        for card in _victory_trail:
+            self.env.act(card,False)
+            self.env.victory_trail=list(filter(lambda _card: card!=_card,self.env.victory_trail))
+        # print()
 
     def sense(self):
         shown_card, hand = self.env.sense()

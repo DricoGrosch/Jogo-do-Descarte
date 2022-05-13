@@ -9,7 +9,6 @@ sys.setrecursionlimit(10000)
 
 while not env.finish():
     agent.step()
-    print()
 
 
 

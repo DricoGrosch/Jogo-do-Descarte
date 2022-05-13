@@ -13,6 +13,9 @@ class Graph:
     def __init__(self):
         self.graph = defaultdict(list)
         self.visual_graph=nx.Graph()
+        self.visited_nodes=[]
+        self.open_nodes=[]
+        self.current_node=None
 
     def get_node_representation(self,node):
         return '|'.join(node)

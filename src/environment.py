@@ -15,13 +15,20 @@ class Environment:
     def setup(self, seed=None):
         if seed:
             random.seed(seed)
-        numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13','14','15']
-        suits = ['P', 'C', 'E', 'O']
+        # numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13','14','15']
+        # suits = ['P', 'C', 'E', 'O']
         # numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
         # suits = ['P', 'C', 'E', 'O']
         # numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
         # suits = ['P', 'C', 'E', 'O']
 
+        # numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '14', '15', '16', '17',
+        #            '18', '19', '20', '21', '22', '23', '24', '25', '26']
+        # suits = ['P', 'C', 'E', 'O', 'X', 'Y', 'Z', 'W']
+        numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
+        suits = ['P', 'C', 'E', 'O']
+        # numbers = ['1', '2', '3', '4', '5', '6', '7','8','9']
+        # suits = ['P', ]
         all_cards = []
         for number in numbers:
             for suit in suits:
@@ -41,12 +48,11 @@ class Environment:
             return True
         return False
 
-
     def score(self):
         return len(self.stack) - len(self.hand)
 
     def _copy(self):
-        new_environment = Environment(seed=5)
+        new_environment = Environment()
         new_environment.shown_card = self.shown_card
         new_environment.stack = [*self.stack]
         new_environment.hand = [*self.hand]
@@ -60,10 +66,14 @@ class Environment:
         self.hand.append(self.stack.pop())
 
     def dispose_card(self, card):
-        self.hand.remove(card)
-        self.shown_card = card
+        try:
+            self.hand.remove(card)
+            self.shown_card = card
+        except Exception as e:
+            print(e)
 
-    def act(self, card=None,add_victory_trail=True):
+    def act(self, card=None, add_victory_trail=True):
         self.dispose_card(card) if card else self.buy_card()
         if add_victory_trail:
             self.victory_trail.append(card)
+
