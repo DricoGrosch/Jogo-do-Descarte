@@ -1,12 +1,12 @@
 from src.deep_agent import DeepAgent
 from src.environment import Environment
 # from src.smart_agent import SmartAgent
+from src.wide_agent import WideAgent
 
-env = Environment()
-# agent = SmartAgent(strategy=SmartAgent.DEEP,_env=env)
-agent = DeepAgent(env)
 import sys
 sys.setrecursionlimit(10000)
+env = Environment(1)
+agent = WideAgent(env)
 
 while not env.finish():
     agent.step()
@@ -15,4 +15,3 @@ while not env.finish():
 
 print(env.score())
 print('adrian')
-# pra cada nó (cada jogada) verificar as cartas que eu posso descartar e pra cada uma criar uma ramificação
