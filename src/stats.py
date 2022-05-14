@@ -6,6 +6,7 @@ from src.dummy_agent import DummyAgent
 from src.environment import Environment
 import sys
 
+from src.uniform_cost_agent import UniformCostAgent
 from src.wide_agent import WideAgent
 
 sys.setrecursionlimit(10000)
@@ -14,7 +15,8 @@ dummy_results = []
 wide_results = []
 deep_results = []
 a_star_results = []
-
+uniform_cost_results = []
+#
 #
 # for _ in range(1000):
 #     env = Environment()
@@ -50,7 +52,7 @@ a_star_results = []
 # print(f'Mean score: {round(statistics.mean(deep_results),2)}')
 # print(f'Standard deviation (score): {round(statistics.stdev(deep_results),2)}')
 # print(f'Median score: {round(statistics.median(deep_results),2)}')
-#
+
 # for _ in range(5):
 #     env = Environment(5)
 #     agent = WideAgent(env)
@@ -67,17 +69,35 @@ a_star_results = []
 # print(f'Standard deviation (score): {round(statistics.stdev(wide_results),2)}')
 # print(f'Median score: {round(statistics.median(wide_results),2)}')
 
-for _ in range(5):
-    env = Environment(5)
-    agent = AStarAgent(env)
+# for _ in range(1000):
+#     env = Environment()
+#     print(f"{_}--> {env.hand}")
+#     agent = AStarAgent(env)
+#     while not env.finish():
+#         agent.step()
+#     a_star_results.append(env.score())
+#
+# print('A STAR RESULTS')
+# print(f'Number of samples: {len(a_star_results)}')
+# print(f'Wins: {sum([1 for x in a_star_results if x >= 0])}')
+# print(f'Losses: {sum([1 for x in a_star_results if x < 0])}')
+# print(f'Mean score: {round(statistics.mean(a_star_results), 2)}')
+# print(f'Standard deviation (score): {round(statistics.stdev(a_star_results), 2)}')
+# print(f'Median score: {round(statistics.median(a_star_results), 2)}')
+#
+
+for _ in range(1000):
+    env = Environment(_)
+    print(f"{_}--> {env.hand}")
+    agent = UniformCostAgent(env)
     while not env.finish():
         agent.step()
-    wide_results.append(env.score())
+    uniform_cost_results.append(env.score())
 
-print('A STAR RESULTS')
-print(f'Number of samples: {len(a_star_results)}')
-print(f'Wins: {sum([1 for x in a_star_results if x >= 0])}')
-print(f'Losses: {sum([1 for x in a_star_results if x < 0])}')
-print(f'Mean score: {round(statistics.mean(a_star_results), 2)}')
-print(f'Standard deviation (score): {round(statistics.stdev(a_star_results), 2)}')
-print(f'Median score: {round(statistics.median(a_star_results), 2)}')
+print('UNIFORM COST RESULTS')
+print(f'Number of samples: {len(uniform_cost_results)}')
+print(f'Wins: {sum([1 for x in uniform_cost_results if x >= 0])}')
+print(f'Losses: {sum([1 for x in uniform_cost_results if x < 0])}')
+print(f'Mean score: {round(statistics.mean(uniform_cost_results), 2)}')
+print(f'Standard deviation (score): {round(statistics.stdev(uniform_cost_results), 2)}')
+print(f'Median score: {round(statistics.median(uniform_cost_results), 2)}')
