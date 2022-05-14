@@ -14,7 +14,7 @@ sys.setrecursionlimit(10000)
 def run_with_coverage(agent_class):
     stats=[]
     print('--------------------')
-    for _ in range(1000):
+    for _ in range(10):
         env = Environment(_)
         print(f"{_}--> {env.hand}")
         agent = agent_class(env)
@@ -34,8 +34,8 @@ def run_with_coverage(agent_class):
 
 
 
-run_with_coverage(DummyAgent)
-run_with_coverage(DeepAgent)
-run_with_coverage(AStarAgent)
-run_with_coverage(WideAgent)
+# run_with_coverage(DummyAgent)
+# run_with_coverage(DeepAgent)
+# run_with_coverage(WideAgent)
+# run_with_coverage(AStarAgent)
 run_with_coverage(UniformCostAgent)

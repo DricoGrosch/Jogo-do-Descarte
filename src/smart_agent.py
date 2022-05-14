@@ -4,7 +4,7 @@ from src.graph import Graph
 
 class SmartAgent(Agent):
     graph = None
-
+    counter=0
     def pop_from_open_nodes(self, open_nodes):
         raise NotImplemented
 
@@ -24,14 +24,25 @@ class SmartAgent(Agent):
         return
 
     def build_winning_tracks(self):
-        current_environment = self.graph.current_node['environment']
-        if current_environment.finish():
-            return current_environment.winning_track
-        current_node_neighbors = self.graph.get_node_neighbors(self.graph.current_node, self.disposable)
-        self.graph.add_open_nodes(current_node_neighbors)
-        next_node_to_visit = self.pop_from_open_nodes(self.graph.open_nodes)
-        if next_node_to_visit:
-            self.graph.visit_node(next_node_to_visit)
-            return self.build_winning_tracks()
-        else:
-            print()
+        meta_node_found=False
+        winning_track=[]
+        while(not meta_node_found):
+            self.counter+=1
+            print(self.counter)
+            current_environment = self.graph.current_node['environment']
+            if current_environment.finish():
+                winning_track = current_environment.winning_track
+                meta_node_found=True
+                continue
+            current_node_neighbors = self.graph.get_node_neighbors(self.graph.current_node, self.disposable)
+            self.graph.add_open_nodes(current_node_neighbors)
+            next_node_to_visit = self.pop_from_open_nodes(self.graph.open_nodes)
+            if next_node_to_visit:
+                self.graph.visit_node(next_node_to_visit)
+            # else:
+            #     print('nao tenho no pra visitar')
+        # print('terminou o while')
+        # print(self.counter)
+        print(f'winning_track-->{winning_track}')
+        return winning_track
+
