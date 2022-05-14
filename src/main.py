@@ -1,11 +1,12 @@
+from src.deep_agent import DeepAgent
 from src.environment import Environment
-from src.smart_agent import SmartAgent
+# from src.smart_agent import SmartAgent
 
-env = Environment(5)
-agent = SmartAgent(strategy=SmartAgent.WIDE,_env=env)
+env = Environment()
+# agent = SmartAgent(strategy=SmartAgent.DEEP,_env=env)
+agent = DeepAgent(env)
 import sys
 sys.setrecursionlimit(10000)
-
 
 while not env.finish():
     agent.step()

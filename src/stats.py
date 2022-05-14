@@ -1,5 +1,6 @@
 import statistics
 
+from src.deep_agent import DeepAgent
 from src.dummy_agent import DummyAgent
 from src.environment import Environment
 from src.smart_agent import SmartAgent
@@ -9,31 +10,34 @@ sys.setrecursionlimit(10000)
 dummy_results = []
 wide_results = []
 deep_results = []
-#
-#
-# for _ in range(1000):
-#     env = Environment()
-#     agent = DummyAgent(env)
-#
-#     while not env.finish():
-#         agent.step()
-#     dummy_results.append(env.score())
-#
-# print('DUMMY RESULTS')
-# print(f'Number of samples: {len(dummy_results)}')
-# print(f'Wins: {sum([1 for x in dummy_results if x >= 0])}')
-# print(f'Losses: {sum([1 for x in dummy_results if x < 0])}')
-# print(f'Mean score: {round(statistics.mean(dummy_results),2)}')
-# print(f'Standard deviation (score): {round(statistics.stdev(dummy_results),2)}')
-# print(f'Median score: {round(statistics.median(dummy_results),2)}')
-#
-for _ in range(10):
+
+
+for _ in range(1000):
     env = Environment()
-    agent = SmartAgent(_env=env)
+    agent = DummyAgent(env)
+
+    while not env.finish():
+        agent.step()
+    dummy_results.append(env.score())
+
+print('DUMMY RESULTS')
+print(f'Number of samples: {len(dummy_results)}')
+print(f'Wins: {sum([1 for x in dummy_results if x >= 0])}')
+print(f'Losses: {sum([1 for x in dummy_results if x < 0])}')
+print(f'Mean score: {round(statistics.mean(dummy_results),2)}')
+print(f'Standard deviation (score): {round(statistics.stdev(dummy_results),2)}')
+print(f'Median score: {round(statistics.median(dummy_results),2)}')
+
+for _ in range(1000):
+    env = Environment()
+    agent = DeepAgent(env)
 
     while not env.finish():
         agent.step()
     deep_results.append(env.score())
+print()
+print('--------------------')
+print()
 
 print('DEEP RESULTS')
 print(f'Number of samples: {len(deep_results)}')
