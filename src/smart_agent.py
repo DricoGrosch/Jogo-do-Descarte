@@ -17,8 +17,11 @@ class SmartAgent(Agent):
         super(SmartAgent, self).step()
 
     def act(self, shown_card, hand):
-        card = self.env.winning_track.pop(0)
-        return card
+        try:
+            card = self.env.winning_track.pop(0)
+            return card
+        except Exception as e:
+            print(e)
 
     def get_node_neighbors(self, node):
         return
@@ -28,7 +31,7 @@ class SmartAgent(Agent):
         winning_track=[]
         while(not meta_node_found):
             self.counter+=1
-            print(self.counter)
+            # print(self.counter)
             current_environment = self.graph.current_node['environment']
             if current_environment.finish():
                 winning_track = current_environment.winning_track

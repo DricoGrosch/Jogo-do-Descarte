@@ -7,15 +7,16 @@ from src.environment import Environment
 
 import sys
 
+from src.smart_environment import SmartEnvironment
 from src.uniform_cost_agent import UniformCostAgent
 from src.wide_agent import WideAgent
 
 sys.setrecursionlimit(10000)
-def run_with_coverage(agent_class):
+def run_with_coverage(agent_class,environmnt_class=Environment):
     stats=[]
     print('--------------------')
-    for _ in range(10):
-        env = Environment(_)
+    for _ in range(1000):
+        env = environmnt_class(_)
         print(f"{_}--> {env.hand}")
         agent = agent_class(env)
         while not env.finish():
@@ -35,7 +36,7 @@ def run_with_coverage(agent_class):
 
 
 # run_with_coverage(DummyAgent)
-# run_with_coverage(DeepAgent)
-# run_with_coverage(WideAgent)
-# run_with_coverage(AStarAgent)
-run_with_coverage(UniformCostAgent)
+# run_with_coverage(DeepAgent,SmartEnvironment)
+# run_with_coverage(WideAgent,SmartEnvironment)
+run_with_coverage(AStarAgent,SmartEnvironment)
+# run_with_coverage(UniformCostAgent,SmartEnvironment)
