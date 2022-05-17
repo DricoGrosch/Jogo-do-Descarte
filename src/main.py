@@ -19,18 +19,21 @@ def run_with_coverage(agent_class, environmnt_class=Environment):
     scores = []
     visited_nodes = []
     times = []
+    lost_agents = 0
     print('--------------------')
     for _ in range(1000):
         env = environmnt_class(_)
         print(_)
         agent = agent_class(env)
         start = datetime.datetime.now()
-        while not env.finish():
+        while not env.finish() and not agent.lost:
             agent.step()
+        if agent.lost:
+            lost_agents += 1
         end = datetime.datetime.now()
         scores.append(env.score())
         times.append((end - start).total_seconds())
-        if hasattr(agent,'graph'):
+        if hasattr(agent, 'graph'):
             visited_nodes.append(len(agent.graph.visited_nodes))
 
     print()
@@ -51,9 +54,13 @@ def run_with_coverage(agent_class, environmnt_class=Environment):
     print(f'Median execution time: {statistics.median(times)}')
     print('--------------------')
 
+    print(f'Los agents: {lost_agents}')
+
+
+
 
 run_with_coverage(DummyAgent)
-# run_with_coverage(DeepAgent, SmartEnvironment)
-run_with_coverage(WideAgent,SmartEnvironment)
-run_with_coverage(AStarAgent,SmartEnvironment)
+run_with_coverage(DeepAgent, SmartEnvironment)
+# run_with_coverage(WideAgent,SmartEnvironment)
+run_with_coverage(AStarAgent, SmartEnvironment)
 # run_with_coverage(UniformCostAgent,SmartEnvironment)

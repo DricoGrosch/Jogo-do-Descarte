@@ -15,8 +15,8 @@ class Environment:
     def setup(self, seed=None):
         if seed:
             random.seed(seed)
-        numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
-        suits = ['P', 'C', 'E', 'O']
+        numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15']
+        suits = ['A','B','C','D','E']
         # numbers = ['1', '2', '3', '4', '5', '6', '7']
         # suits = ['P']
         all_cards = []

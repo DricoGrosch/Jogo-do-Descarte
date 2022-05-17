@@ -5,7 +5,6 @@ class Graph:
     visited_nodes = []
     current_node = None
     open_nodes = []
-
     def __init__(self):
         self.graph = defaultdict(list)
         self.visited_nodes = []

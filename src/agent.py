@@ -1,4 +1,6 @@
 class Agent:
+    lost = False
+
     def __init__(self, _env):
         self.env = _env
 
