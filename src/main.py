@@ -39,8 +39,8 @@ def run_with_coverage(agent_class, environmnt_class=Environment):
     print()
     print(f'---------{agent_class}----------------')
     print(f'Number of samples: {len(scores)}')
-    print(f'Wins: {sum([1 for x in scores if x >= 0])}')
-    print(f'Losses: {sum([1 for x in scores if x < 0])}')
+    print(f'Wins: {sum([1 for x in scores if x >= 0])-lost_agents}')
+    print(f'Losses: {sum([1 for x in scores if x < 0])+lost_agents}')
     print(f'Mean score: {round(statistics.mean(scores), 2)}')
     print(f'Standard deviation (score): {round(statistics.stdev(scores), 2)}')
     print(f'Median score: {round(statistics.median(scores), 2)}')
@@ -59,8 +59,8 @@ def run_with_coverage(agent_class, environmnt_class=Environment):
 
 
 
-run_with_coverage(DummyAgent)
-run_with_coverage(DeepAgent, SmartEnvironment)
-# run_with_coverage(WideAgent,SmartEnvironment)
-run_with_coverage(AStarAgent, SmartEnvironment)
-# run_with_coverage(UniformCostAgent,SmartEnvironment)
+#run_with_coverage(DummyAgent)
+#run_with_coverage(DeepAgent, SmartEnvironment)
+#run_with_coverage(WideAgent,SmartEnvironment)
+#run_with_coverage(AStarAgent, SmartEnvironment)
+run_with_coverage(UniformCostAgent,SmartEnvironment)
