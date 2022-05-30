@@ -7,7 +7,7 @@ class Environment:
     shown_card = None
     stack = None
     hand = None
-    victory_trail = []
+    winning_track = []
 
     def __init__(self, seed=None):
         self.setup(seed)
@@ -15,9 +15,10 @@ class Environment:
     def setup(self, seed=None):
         if seed:
             random.seed(seed)
-
-        numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
-        suits = ['P', 'C', 'E', 'O']
+        numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15']
+        suits = ['A','B','C','D','E']
+        # numbers = ['1', '2', '3', '4', '5', '6', '7']
+        # suits = ['P']
         all_cards = []
         for number in numbers:
             for suit in suits:
@@ -29,25 +30,10 @@ class Environment:
         self.stack = all_cards[6:]
 
     def finish(self):
-        if not self.hand:
-            return True
-        if not self.stack and self.victory_trail:
-            return False
-        if not self.stack and not self.victory_trail:
-            return True
-        return False
-
+        return len(self.hand) == 0 or len(self.stack) == 0
 
     def score(self):
         return len(self.stack) - len(self.hand)
-
-    def _copy(self):
-        new_environment = Environment(seed=5)
-        new_environment.shown_card = self.shown_card
-        new_environment.stack = [*self.stack]
-        new_environment.hand = [*self.hand]
-        new_environment.victory_trail = [*self.victory_trail]
-        return new_environment
 
     def sense(self):
         return self.shown_card, self.hand
@@ -59,7 +45,13 @@ class Environment:
         self.hand.remove(card)
         self.shown_card = card
 
-    def act(self, card=None,add_victory_trail=True):
+    def _copy(self):
+        new_environment = Environment()
+        new_environment.shown_card = self.shown_card
+        new_environment.stack = [*self.stack]
+        new_environment.hand = [*self.hand]
+        new_environment.winning_track = [*self.winning_track]
+        return new_environment
+
+    def act(self, card):
         self.dispose_card(card) if card else self.buy_card()
-        if add_victory_trail:
-            self.victory_trail.append(card)

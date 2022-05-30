@@ -1,12 +1,13 @@
 class Agent:
+    lost = False
+
     def __init__(self, _env):
         self.env = _env
 
     def step(self):
         shown_card, hand = self.sense()
         card = self.act(shown_card, hand)
-        self.env.act(card,False)
-        print()
+        self.env.act(card)
 
     def sense(self):
         shown_card, hand = self.env.sense()
